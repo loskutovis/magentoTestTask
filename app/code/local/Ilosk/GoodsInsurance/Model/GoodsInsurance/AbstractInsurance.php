@@ -1,6 +1,6 @@
 <?php
 
-abstract class Ilosk_GoodsInsurance_Model_GoodsInsurance_AbstractInsurance implements Ilosk_GoodsInsurance_Model_GoodsInsurance_InsuranceInterface
+abstract class Ilosk_GoodsInsurance_Model_GoodsInsurance_AbstractInsurance
 {
     protected $value;
 

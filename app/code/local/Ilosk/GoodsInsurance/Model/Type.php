@@ -12,9 +12,7 @@ class Ilosk_GoodsInsurance_Model_Type
      */
     public function toOptionArray()
     {
-        $config = Mage::getConfig()
-            ->getNode('global/settings/goodsinsurance/goodsinsurance')
-            ->asArray();
+        $config = Mage::getConfig()->getNode('global/settings/goodsinsurance/goodsinsurance')->asArray();
 
         $result = [];
 

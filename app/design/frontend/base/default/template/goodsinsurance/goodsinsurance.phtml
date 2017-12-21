@@ -1,12 +1,14 @@
 <div id="insurance_container">
     <label>
         <input type="checkbox" name="add_insurance" id="add_insurance" /> Add insurance
+        <input type="hidden" name="is_shipping" value="1" />
     </label>
     <div>
         Price of insurance: <span id="insurance_price"></span>
     </div>
 </div>
 <script type="text/javascript">
+    var firstCheckedMethod = document.querySelector('input[name="shipping_method"]:checked');
     var availableMethods = JSON.parse('<?= $this->getAvailableMethods() ?>');
     var insuranceContainer = document.getElementById('insurance_container');
     var insurancePrice = document.getElementById('insurance_price');
@@ -23,7 +25,11 @@
         }
     }
 
-    handleInsurance(document.querySelector('input[name="shipping_method"]:checked'));
+    if (firstCheckedMethod === null) {
+        insuranceContainer.style.display = 'none';
+    } else {
+        handleInsurance(firstCheckedMethod);
+    }
 
     for (var i = 0; i < shippingMethods.length; i++) {
         (function(){

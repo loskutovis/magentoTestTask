@@ -23,27 +23,19 @@
         <fieldsets>
             <sales_convert_quote>
                 <goodsinsurance_amount><to_order>*</to_order></goodsinsurance_amount>
-                <goodsinsurance_value><to_order>*</to_order></goodsinsurance_value>
-                <goodsinsurance_type><to_order>*</to_order></goodsinsurance_type>
             </sales_convert_quote>
-
-            <sales_convert_order>
-                <goodsinsurance_amount><to_quote>*</to_quote></goodsinsurance_amount>
-                <goodsinsurance_value><to_quote>*</to_quote></goodsinsurance_value>
-                <goodsinsurance_type><to_quote>*</to_quote></goodsinsurance_type>
-            </sales_convert_order>
         </fieldsets>
         <blocks>
             <adminhtml>
                 <rewrite>
-                    <sales_order_totals>Ilosk_GoodsInsurance_Block_Adminhtml_Total_Order</sales_order_totals>
+                    <sales_order_totals>Ilosk_GoodsInsurance_Block_Adminhtml_Total_Quote</sales_order_totals>
                     <sales_order_invoice_totals>Ilosk_GoodsInsurance_Block_Adminhtml_Total_Invoice</sales_order_invoice_totals>
                     <sales_order_creditmemo_totals>Ilosk_GoodsInsurance_Block_Adminhtml_Total_Creditmemo</sales_order_creditmemo_totals>
                 </rewrite>
             </adminhtml>
             <sales>
                 <rewrite>
-                    <order_totals>Ilosk_GoodsInsurance_Block_Frontend_Total_Order</order_totals>
+                    <order_totals>Ilosk_GoodsInsurance_Block_Frontend_Total_Quote</order_totals>
                     <order_invoice_totals>Ilosk_GoodsInsurance_Block_Frontend_Total_Invoice</order_invoice_totals>
                     <order_creditmemo_totals>Ilosk_GoodsInsurance_Block_Frontend_Total_Creditmemo</order_creditmemo_totals>
                 </rewrite>
@@ -65,7 +57,7 @@
             <quote>
                 <totals>
                     <goodsinsurance>
-                        <class>Ilosk_GoodsInsurance_Model_Total_Order</class>
+                        <class>Ilosk_GoodsInsurance_Model_Total_Quote</class>
                         <after>subtotal</after>
                     </goodsinsurance>
                 </totals>

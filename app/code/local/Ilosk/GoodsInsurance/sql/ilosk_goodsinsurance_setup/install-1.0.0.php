@@ -12,15 +12,10 @@ $insuranceField = [
     'comment' => 'Insurance value',
 ];
 
-$orderTable = $this->getTable('sales_flat_order');
 $quoteTable = $this->getTable('sales_flat_quote');
 
-if(!$connection->tableColumnExists($orderTable, 'insurance_value')) {
-    $connection->addColumn($orderTable, 'insurance_value', $insuranceField);
-}
-
-if(!$connection->tableColumnExists($quoteTable, 'insurance_value')) {
-    $connection->addColumn($quoteTable, 'insurance_value', $insuranceField);
+if(!$connection->tableColumnExists($quoteTable, 'insurance_amount')) {
+    $connection->addColumn($quoteTable, 'insurance_amount', $insuranceField);
 }
 
 $this->endSetup();

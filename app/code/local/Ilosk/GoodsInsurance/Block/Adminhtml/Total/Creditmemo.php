@@ -6,7 +6,6 @@ class Ilosk_GoodsInsurance_Block_Adminhtml_Total_Creditmemo extends Mage_Adminht
     {
         parent::_initTotals();
 
-        return Mage::helper('goodsinsurance/Total')
-            ->addToTotal($this);
+        return Mage::helper('goodsinsurance/Total')->addToTotal($this);
     }
 }

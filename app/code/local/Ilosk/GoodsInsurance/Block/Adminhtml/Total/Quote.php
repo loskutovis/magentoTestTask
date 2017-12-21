@@ -1,6 +1,6 @@
 <?php
 
-class Ilosk_GoodsInsurance_Block_Adminhtml_Total_Order extends Mage_Adminhtml_Block_Sales_Order_Totals
+class Ilosk_GoodsInsurance_Block_Adminhtml_Total_Quote extends Mage_Adminhtml_Block_Sales_Order_Totals
 {
     protected function _initTotals()
     {

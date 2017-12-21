@@ -17,7 +17,7 @@ class Ilosk_GoodsInsurance_Block_Frontend_GoodsInsurance extends Mage_Core_Block
 
         foreach ($shippingMethods as $code => $method) {
             if($method->getConfigData('goodsinsurance_active')) {
-                $insurance = Mage::helper('goodsinsurance/Factory')->getInsuranceByMethod($code);
+                $insurance = Mage::helper('goodsinsurance/InsuranceFactory')->getInsuranceByMethod($code);
 
                 $amount = $insurance->getAmount($total);
 

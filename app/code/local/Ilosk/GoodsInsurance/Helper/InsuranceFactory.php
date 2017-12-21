@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Class Ilosk_GoodsInsurance_Helper_Factory
+ * Class Ilosk_GoodsInsurance_Helper_InsuranceFactory
  */
-class Ilosk_GoodsInsurance_Helper_Factory
+class Ilosk_GoodsInsurance_Helper_InsuranceFactory
 {
     /**
      * @param String $address

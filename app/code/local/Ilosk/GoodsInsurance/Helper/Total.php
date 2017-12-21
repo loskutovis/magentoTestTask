@@ -6,19 +6,18 @@
 class Ilosk_GoodsInsurance_Helper_Total
 {
     /**
+     * @param $address
      * @return int
      */
     public function getInsuranceAmount($address)
     {
         $amount = 0;
 
-        $request = Mage::app()->getRequest();
-
-        if ($request->getPost('add_insurance')) {
+        if ($_POST['add_insurance']) {
             try {
                 $amount = Mage::getModel('checkout/session')->getQuote()->getBaseSubtotal();
 
-                $insurance = Mage::helper('goodsinsurance/Factory')->getInsuranceByAddress($address);
+                $insurance = Mage::helper('goodsinsurance/InsuranceFactory')->getInsuranceByAddress($address);
                 $amount = $insurance->getAmount($amount);
             } catch (Exception $e) {
                 //
@@ -31,21 +30,65 @@ class Ilosk_GoodsInsurance_Helper_Total
     }
 
     /**
+     * @param $total
+     * @return mixed
+     */
+    public function getQuote($total)
+    {
+        $order = $total->getOrder();
+
+        $store = Mage::getSingleton('core/store')->load($order->getStoreId());
+
+        $quote = Mage::getModel('sales/quote')->setStore($store)->load($order->getQuoteId());
+
+        return $quote;
+    }
+
+    /**
+     * @param $total
+     * @return mixed
+     */
+    public function getGrandTotal($total)
+    {
+        $quote = $this->getQuote($total);
+
+        return $quote->getGrandTotal();
+    }
+
+    /**
+     * @param $total
+     * @return Varien_Object
+     */
+    public function getGrandTotalObject($total)
+    {
+        $grandTotal = $this->getGrandTotal($total);
+
+        return new Varien_Object([
+            'code'      => 'grand_total',
+            'strong'    => true,
+            'value'     => $grandTotal,
+            'base_value'=> $grandTotal,
+            'label'     => $total->helper('sales')->__('Grand Total'),
+            'area'      => 'footer'
+        ]);
+    }
+
+    /**
      * @param Mage_Sales_Block_Order_Totals $total
      * @return Mage_Sales_Block_Order_Totals
      */
     public function addToTotal(Mage_Sales_Block_Order_Totals $total)
     {
-        $order = $total->getOrder();
+        $quote = $this->getQuote($total);
 
-        $amount = $order->getGoodsInsuranceAmount();
+        $amount = $quote->getInsuranceAmount();
 
         if ((int) $amount) {
-            $total->addTotal(new Varien_Object(array(
+            $total->addTotal(new Varien_Object([
                 'code'      => 'goodsinsurance',
                 'value'     => $amount,
                 'label'     => 'Goods Insurance',
-            )), array('shipping'));
+            ]), ['shipping']);
         }
 
         return $total;
@@ -57,14 +100,14 @@ class Ilosk_GoodsInsurance_Helper_Total
      */
     public function addToAddress(Mage_Sales_Model_Quote_Address $address)
     {
-        $amount = $this->getInsuranceAmount($address);
+        $amount = $address->getQuote()->getInsuranceAmount();
 
         if ((int) $amount) {
-            $address->addTotal(array(
+            $address->addTotal([
                 'code'      => 'goodsinsurance',
                 'value'     => $amount,
                 'title'     => 'Goods Insurance',
-            ), array('shipping'));
+            ], ['shipping']);
         }
 
         return $address;
