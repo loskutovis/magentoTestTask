@@ -1,0 +1,8 @@
+<layout version="1.0.0">
+    <checkout_onepage_additional>
+        <reference name="root">
+            <block type="Ilosk_GoodsInsurance_Block_Frontend_GoodsInsurance" name="goods.insurance" output="toHtml" template="goodsinsurance/goodsinsurance.phtml">
+            </block>
+        </reference>
+    </checkout_onepage_additional>
+</layout>

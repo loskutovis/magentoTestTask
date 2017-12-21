@@ -1,0 +1,37 @@
+<div id="insurance_container">
+    <label>
+        <input type="checkbox" name="add_insurance" id="add_insurance" /> Add insurance
+    </label>
+    <div>
+        Price of insurance: <span id="insurance_price"></span>
+    </div>
+</div>
+<script type="text/javascript">
+    var availableMethods = JSON.parse('<?= $this->getAvailableMethods() ?>');
+    var insuranceContainer = document.getElementById('insurance_container');
+    var insurancePrice = document.getElementById('insurance_price');
+    var shippingMethods = document.getElementsByName('shipping_method');
+
+    function handleInsurance(method) {
+        var code = method.value.split('_');
+
+        if (availableMethods[code[0]] !== undefined) {
+            insurancePrice.innerText = availableMethods[code[0]];
+            insuranceContainer.style.display = 'block';
+        } else {
+            insuranceContainer.style.display = 'none';
+        }
+    }
+
+    handleInsurance(document.querySelector('input[name="shipping_method"]:checked'));
+
+    for (var i = 0; i < shippingMethods.length; i++) {
+        (function(){
+            var method = shippingMethods[i];
+
+            method.addEventListener('click', function(){
+                handleInsurance(method);
+            });
+        }());
+    }
+</script>

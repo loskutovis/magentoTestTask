@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Ilosk_GoodsInsurance>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Ilosk_GoodsInsurance>
+    </modules>
+</config>
