@@ -42,11 +42,11 @@
             </sales>
         </blocks>
         <resources>
-            <goodsinsurance_setup>
+            <ilosk_goodsinsurance_setup>
                 <setup>
                     <module>Ilosk_GoodsInsurance</module>
                 </setup>
-            </goodsinsurance_setup>
+            </ilosk_goodsinsurance_setup>
         </resources>
         <helpers>
             <goodsinsurance>
