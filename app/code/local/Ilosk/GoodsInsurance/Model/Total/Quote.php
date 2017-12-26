@@ -23,16 +23,7 @@ class Ilosk_GoodsInsurance_Model_Total_Quote extends Mage_Sales_Model_Quote_Addr
     {
         parent::collect($address);
 
-        if (isset($_POST['is_shipping']) && $_POST['is_shipping'] == 1) {
-            $amount = Mage::helper('goodsinsurance/Total')->getInsuranceAmount($address);
-
-            $address->getQuote()->setInsuranceAmount($amount);
-        } elseif ($this->isShippingAddress($address)) {
-            $amount = $address->getQuote()->getInsuranceAmount();
-
-            $this->_addAmount($amount);
-            $this->_addBaseAmount($amount);
-
+        if ($this->isShippingAddress($address) && $amount = $address->getInsuranceAmount()) {
             $address->setGrandTotal($address->getGrandTotal() + $amount);
             $address->setBaseGrandTotal($address->getBaseGrandTotal() + $amount);
         }

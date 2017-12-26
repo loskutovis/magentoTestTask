@@ -12,10 +12,15 @@ $insuranceField = [
     'comment' => 'Insurance value',
 ];
 
-$quoteTable = $this->getTable('sales_flat_quote');
+$tables = [
+    $this->getTable('sales/quote_address'),
+    $this->getTable('sales/order')
+];
 
-if(!$connection->tableColumnExists($quoteTable, 'insurance_amount')) {
-    $connection->addColumn($quoteTable, 'insurance_amount', $insuranceField);
+foreach ($tables as $table) {
+    if (!$connection->tableColumnExists($table, 'insurance_amount')) {
+        $connection->addColumn($table, 'insurance_amount', $insuranceField);
+    }
 }
 
 $this->endSetup();

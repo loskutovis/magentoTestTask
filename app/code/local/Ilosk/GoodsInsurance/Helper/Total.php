@@ -37,6 +37,17 @@ class Ilosk_GoodsInsurance_Helper_Total
     {
         $order = $total->getOrder();
 
+        $quote = $this->getQuoteByOrder($order);
+
+        return $quote;
+    }
+
+    /**
+     * @param $order
+     * @return mixed
+     */
+    public function getQuoteByOrder($order)
+    {
         $store = Mage::getSingleton('core/store')->load($order->getStoreId());
 
         $quote = Mage::getModel('sales/quote')->setStore($store)->load($order->getQuoteId());
@@ -50,9 +61,9 @@ class Ilosk_GoodsInsurance_Helper_Total
      */
     public function getGrandTotal($total)
     {
-        $quote = $this->getQuote($total);
+        $order = $total->getOrder();
 
-        return $quote->getGrandTotal();
+        return $order->getGrandTotal();
     }
 
     /**
@@ -79,9 +90,9 @@ class Ilosk_GoodsInsurance_Helper_Total
      */
     public function addToTotal(Mage_Sales_Block_Order_Totals $total)
     {
-        $quote = $this->getQuote($total);
+        $order = $total->getOrder();
 
-        $amount = $quote->getInsuranceAmount();
+        $amount = $order->getInsuranceAmount();
 
         if ((int) $amount) {
             $total->addTotal(new Varien_Object([
@@ -100,7 +111,7 @@ class Ilosk_GoodsInsurance_Helper_Total
      */
     public function addToAddress(Mage_Sales_Model_Quote_Address $address)
     {
-        $amount = $address->getQuote()->getInsuranceAmount();
+        $amount = $address->getInsuranceAmount();
 
         if ((int) $amount) {
             $address->addTotal([
